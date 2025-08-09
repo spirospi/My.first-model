@@ -1,6 +1,4 @@
 
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -19,5 +17,6 @@ model = LinearRegression()
 model.fit (X, y)
 
 model.coef_,
+
 
 model.intercept_
