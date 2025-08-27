@@ -1,0 +1,41 @@
+real life - reddit practice project
+
+
+
+Importing libraries 
+
+import requests 
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+Creating our fuction
+   
+def get_reddit_data(data_type, **kwargs):
+    base_url = f"https://api.pushrift.io/reddit/search/{data_type}/"
+    payload = kwargs   # valuable information that you get back from a get request
+
+    request = requests.get(base_url, params=payload)
+    return request.json()
+ 
+
+calling our fuction 
+
+term_frequency = get_reddit_data(
+    data_type="comment",
+    q="programming",
+    after="48h",
+    size=100,
+    sort="desc",
+    aggs="subreddit"
+)
+
+# term_frequency is already a list of dicts -> just build a DataFrame
+termfreq_df = pd.DataFrame.from_records(term_frequency)
+
+# Show the first 10 rows
+termfreq_df = termfreq_df.head(10)
+termfreq_df
+
+
+termfreq_df.plot(kind='bar, x = 'key', y = 'doc_count')
